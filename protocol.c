@@ -84,7 +84,10 @@ enet_protocol_dispatch_incoming_commands (ENetHost * host, ENetEvent * event)
            event -> peer = peer;
            event -> data = peer -> eventData;
 
+           // NOTE: Preserve ID
+           enet_uint32 ID = peer -> connectID;
            enet_peer_reset (peer);
+           peer -> connectID = ID;
 
            return 1;
 
